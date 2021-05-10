@@ -9,6 +9,7 @@
 	>
 	<div class="draggable" ref="item">
 		<header
+			class="drag-handle"
 			ref="dragHandle"
 		>
 			Drag here
@@ -98,6 +99,13 @@ export default {
 	border: 1px solid gray;
 	border-radius: 4px;
 	touch-action: none;
-      user-select: none;
+  	user-select: none;
+}
+
+.drag-handle {
+	cursor: grab;
+	background: #caa;
+	border-bottom: 1px solid gray;
+	padding: 8px;
 }
 </style>

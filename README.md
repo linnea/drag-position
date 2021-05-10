@@ -1,4 +1,5 @@
 # drag-position
+![drag gif](/public/drag.gif)
 
 ## Project setup
 ```
