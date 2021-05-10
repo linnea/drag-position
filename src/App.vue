@@ -12,11 +12,11 @@
 import Draggable from './components/Draggable.vue'
 
 export default {
-	name: 'App',
-	components: {
-		Draggable,
-	},
-};
+  name: 'App',
+  components: {
+    Draggable
+  }
+}
 </script>
 
 <style>
