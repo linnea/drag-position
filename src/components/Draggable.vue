@@ -64,7 +64,6 @@ export default {
 			}
 		},
 		dragEnd(e) {
-			console.log('dragEnd');
 			this.initialX = this.currentX;
 			this.initialY = this.currentY;
 

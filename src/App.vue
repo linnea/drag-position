@@ -1,18 +1,22 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <draggable />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+/**
+ * https://www.kirupa.com/html5/drag.htm
+ * Kirupa's vanilla js draggable example roughly adapted for vue 2
+ */
+import Draggable from './components/Draggable.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+	name: 'App',
+	components: {
+		Draggable,
+	},
+},
 </script>
 
 <style>
