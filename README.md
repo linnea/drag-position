@@ -1,8 +1,7 @@
 # drag-position
 ![drag gif](/public/drag.gif)
 
-https://www.kirupa.com/html5/drag.htm
-Kirupa's vanilla js draggable example roughly adapted for vue 2
+[Kirupa's vanilla js draggable example](https://www.kirupa.com/html5/drag.htm) roughly adapted for vue 2
 
 ## Project setup
 ```

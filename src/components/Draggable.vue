@@ -1,22 +1,22 @@
 <template>
-	<div class="container" ref="container"
-		@touchstart="dragStart"
-		@touchend="dragEnd"
-		@touchmove="drag"
-		@mousedown="dragStart"
-		@mouseup="dragEnd"
-		@mousemove="drag"
-	>
-	<div class="draggable" ref="item">
-		<header
-			class="drag-handle"
-			ref="dragHandle"
-		>
-			Drag here
-		</header>
-		Draggable
-	</div>
-</div>
+  <div class="container" ref="container"
+    @touchstart="dragStart"
+    @touchend="dragEnd"
+    @touchmove="drag"
+    @mousedown="dragStart"
+    @mouseup="dragEnd"
+    @mousemove="drag"
+  >
+    <div class="draggable" ref="item">
+      <header
+        class="drag-handle"
+        ref="dragHandle"
+      >
+        Drag here
+      </header>
+      Draggable
+      </div>
+  </div>
 </template>
 
 <script>
@@ -90,22 +90,22 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container {
-	touch-action: none;
+  touch-action: none;
 }
 
 .draggable {
-	width: 200px;
-	height: 200px;
-	border: 1px solid gray;
-	border-radius: 4px;
-	touch-action: none;
-  	user-select: none;
+  width: 200px;
+  height: 200px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  touch-action: none;
+  user-select: none;
 }
 
 .drag-handle {
-	cursor: grab;
-	background: #caa;
-	border-bottom: 1px solid gray;
-	padding: 8px;
+  cursor: grab;
+  background: #caa;
+  border-bottom: 1px solid gray;
+  padding: 8px;
 }
 </style>
