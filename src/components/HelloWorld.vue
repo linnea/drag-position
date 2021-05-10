@@ -1,58 +1,104 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+	<div class="container" ref="container"
+		@touchstart="dragStart"
+		@touchend="dragEnd"
+		@touchmove="drag"
+		@mousedown="dragStart"
+		@mouseup="dragEnd"
+		@mousemove="drag"
+	>
+	<div class="draggable" ref="item">
+		<header
+			ref="dragHandle"
+		>
+			Drag here
+		</header>
+		Draggable
+	</div>
+</div>
 </template>
 
 <script>
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+	name: 'Draggable',
+
+	data() {
+		return {
+			dragItem: null,
+			active: false,
+			currentX: null,
+			currentY: null,
+			initialX: null,
+			initialY: null,
+			xOffset: 0,
+			yOffset: 0,
+		};
+	},
+
+	mounted() {
+		this.dragItem = this.$refs.item;
+	},
+
+	methods: {
+		setTranslate(xPos, yPos, el) {
+			el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+		},
+		drag(e) {
+			console.log('drag');
+			if (this.active) {
+				e.preventDefault();
+
+				if (e.type === "touchmove") {
+					this.currentX = e.touches[0].clientX - this.initialX;
+					this.currentY = e.touches[0].clientY - this.initialY;
+				} else {
+					this.currentX = e.clientX - this.initialX;
+					this.currentY = e.clientY - this.initialY;
+				}
+
+				this.xOffset = this.currentX;
+				this.yOffset = this.currentY;
+
+				this.setTranslate(this.currentX, this.currentY, this.dragItem);
+			}
+		},
+		dragEnd(e) {
+			console.log('dragEnd');
+			this.initialX = this.currentX;
+			this.initialY = this.currentY;
+
+			this.active = false;
+		},
+		dragStart(e) {
+			if (e.type === "touchstart") {
+				this.initialX = e.touches[0].clientX - this.xOffset;
+				this.initialY = e.touches[0].clientY - this.yOffset;
+			} else {
+				this.initialX = e.clientX - this.xOffset;
+				this.initialY = e.clientY - this.yOffset;
+			}
+
+			if (e.target === this.$refs.dragHandle) {
+				this.active = true;
+			}
+		},
+	},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.container {
+	touch-action: none;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.draggable {
+	width: 200px;
+	height: 200px;
+	border: 1px solid gray;
+	border-radius: 4px;
+	touch-action: none;
+      user-select: none;
 }
 </style>
